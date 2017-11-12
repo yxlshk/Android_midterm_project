@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shopping_list_one_good"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="25dp">
+    <ImageView
+        android:id="@+id/people_head"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/liubei"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:text="刘备   字：玄德"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toRightOf="@id/people_head" />
+
+    <TextView
+        android:id="@+id/detail_one"
+        android:layout_width="220dp"
+        android:layout_height="20dp"
+        android:paddingLeft="10dp"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:text="男 生卒(161-223) 籍贯：幽州涿郡涿"
+        app:layout_constraintLeft_toRightOf="@id/people_head"
+        app:layout_constraintTop_toBottomOf="@id/name"/>
+
+    <TextView
+        android:id="@+id/detail_two"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_one"
+        app:layout_constraintLeft_toRightOf="@id/people_head"
+        android:text="刘备，蜀汉的开国皇帝，汉景帝之子中山靖王刘胜的后代。"
+        android:textColor="#000000"
+        android:textSize="13sp"/>
+
+</android.support.constraint.ConstraintLayout>
