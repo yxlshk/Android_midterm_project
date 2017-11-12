@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Android_midterm_project</string>
+    <string name="edit">编辑</string>
+    <string name="name">姓名:</string>
+    <string name="gender">性别:</string>
+    <string name="lifetime">生卒年月:</string>
+    <string name="place">籍贯:</string>
+    <string name="league">主效势力:</string>
+    <string name="details">人物详情</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="changeAvatar">修改头像</string>
 </resources>

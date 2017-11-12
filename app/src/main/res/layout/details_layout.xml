@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <View
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/topBar"
+        android:background="@color/colorPrimary"
+        >
+    </View>
+    
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/back"
+        android:id="@+id/backButton"
+        app:layout_constraintLeft_toLeftOf="@id/topBar"
+        app:layout_constraintTop_toTopOf="@id/topBar"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details"
+        app:layout_constraintLeft_toLeftOf="@id/topBar"
+        app:layout_constraintRight_toRightOf="@id/topBar"
+        app:layout_constraintTop_toTopOf="@id/topBar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="@string/edit"
+        app:layout_constraintRight_toRightOf="@id/topBar"
+        app:layout_constraintTop_toTopOf="@id/topBar"
+        android:background="@color/transparent"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_margin="9dp"/>
+    
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        android:id="@+id/avatar"
+        android:layout_margin="20dp"
+        android:src="@mipmap/gy"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="25dp"
+        android:text="@string/changeAvatar"
+        app:layout_constraintLeft_toLeftOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        android:textColor="@color/white"
+        android:background="@color/transparent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoName"
+        android:text="@string/name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/realName"
+        app:layout_constraintTop_toTopOf="@id/realName"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realName"
+        android:text="关羽"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@+id/infoName"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="100dp"
+        android:enabled="false"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoGender"
+        android:text="@string/gender"
+        app:layout_constraintRight_toRightOf="@id/infoName"
+        app:layout_constraintTop_toTopOf="@id/realGender"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realGender"
+        android:text="男"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/realName"
+        app:layout_constraintLeft_toLeftOf="@id/realName"
+        android:layout_marginRight="100dp"
+        android:enabled="false"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoLife"
+        android:text="@string/lifetime"
+        app:layout_constraintRight_toRightOf="@id/infoName"
+        app:layout_constraintTop_toTopOf="@id/realLife"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realLife"
+        android:text="? - 219"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/realGender"
+        app:layout_constraintLeft_toLeftOf="@id/realGender"
+        android:layout_marginRight="100dp"
+        android:enabled="false"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoPlace"
+        android:text="@string/place"
+        app:layout_constraintRight_toRightOf="@id/infoName"
+        app:layout_constraintTop_toTopOf="@id/realPlace"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realPlace"
+        android:text="司隶河东郡解"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/realLife"
+        app:layout_constraintLeft_toLeftOf="@id/realLife"
+        android:layout_marginRight="100dp"
+        android:enabled="false"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoLeague"
+        android:text="@string/league"
+        app:layout_constraintRight_toRightOf="@id/infoName"
+        app:layout_constraintTop_toTopOf="@id/realLeague"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realLeague"
+        android:text="蜀"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/realPlace"
+        app:layout_constraintLeft_toLeftOf="@id/realPlace"
+        android:layout_marginRight="100dp"
+        android:enabled="false"
+        android:textColor="@color/black"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/bottomBar"
+        android:background="@color/colorPrimary"
+        >
+    </View>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:id="@+id/cancelBtn"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@id/bottomBar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@id/bottomBar"
+        android:background="@color/transparent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:id="@+id/okBtn"
+        android:text="@string/ok"
+        app:layout_constraintBottom_toBottomOf="@id/bottomBar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="@id/bottomBar"
+        android:background="@color/transparent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="12dp"/>
+</android.support.constraint.ConstraintLayout>
