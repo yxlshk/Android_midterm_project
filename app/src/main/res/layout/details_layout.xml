@@ -44,6 +44,7 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:text="@string/edit"
+        android:id="@+id/editButton"
         app:layout_constraintRight_toRightOf="@id/topBar"
         app:layout_constraintTop_toTopOf="@id/topBar"
         android:background="@color/transparent"

@@ -59,19 +59,20 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar"
         android:id="@+id/avatar"
         android:layout_margin="20dp"
-        android:src="@drawable/guanyu"/>
+        android:background="@color/transparent"
+        android:src="@drawable/unknown"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="0dp"
         android:minHeight="25dp"
-        android:text="@string/changeAvatar"
         app:layout_constraintLeft_toLeftOf="@id/avatar"
         app:layout_constraintRight_toRightOf="@id/avatar"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         android:textColor="@color/white"
-        android:background="@color/transparent" />
+        android:background="@color/transparent"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/realName"
-        android:text="关羽"
         android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@+id/infoName"
         app:layout_constraintTop_toBottomOf="@id/avatar"
@@ -158,7 +158,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/realLife"
-        android:text="111 - 219"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/realGender"
         app:layout_constraintLeft_toLeftOf="@id/realGender"
@@ -179,7 +178,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/realPlace"
-        android:text="司隶河东郡解"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/realLife"
         app:layout_constraintLeft_toLeftOf="@id/realLife"
