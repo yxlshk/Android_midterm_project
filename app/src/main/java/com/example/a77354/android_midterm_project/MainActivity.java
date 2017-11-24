@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         //main_list_data表示在首页显示的英雄数据
 
         // 给首页的RecycleView赋值
+        R.id
         RecyclerView main_list = (RecyclerView) findViewById(R.id.list);
         RecyclerView search_list = (RecyclerView) findViewById(R.id.search_list);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -124,8 +125,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 首页长按英雄删除的事件
+        // 搜索内容点击英雄事件
         hero.setOnItemLongClickListener(new CommonAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                String name = main_list_data.get(position).name;
+                main_list_data.remove(position);
+                hero.notifyDataSetChanged();
+                int num = position + 1;
+                Toast.makeText(getApplicationContext(), "删除第"+num+"个英雄", Toast.LENGTH_SHORT).show();
+                db.delete("hero_table", "name = ?", new String[]{name});
+            }
+        });
+        // 首页长按英雄删除的事件
+        search.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, detailActivity.class);
+                HeroInfomation heroInfo = main_list_data.get(position);
+                intent.putExtra("heroInfo", heroInfo);
+                startActivity(intent);
+                // 点击跳转代码在这里写
+            }
+        });
+
+        // 搜索内容长按英雄删除的事件
+        search.setOnItemLongClickListener(new CommonAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View view, int position) {
                 String name = main_list_data.get(position).name;
