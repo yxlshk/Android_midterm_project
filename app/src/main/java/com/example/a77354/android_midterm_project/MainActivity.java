@@ -3,8 +3,10 @@ package com.example.a77354.android_midterm_project;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,26 +29,38 @@ public class MainActivity extends AppCompatActivity {
     CommonAdapter<HeroInfomation> hero;
     CommonAdapter<HeroInfomation> search;
     private List<HeroInfomation> main_list_data = new ArrayList<HeroInfomation>();
+    private ServiceConnection sc;
+    private MusicService.MyBinder myBinder;
+
     private List<HeroInfomation> query_list = new ArrayList<HeroInfomation>();
     SQLiteDatabase db;
     String SQL_CREATE_TABLE = "create table if not exists hero_table(name text, nick_name text, sex text, born_die_date text, home_town text, loyal_to text, detail_info text, image_id int)" ;
     String SQL_INSERT_TABLE = "insert into hero_table values(?,?,?,?,?,?,?,?)";
     String SQL_SELECT_ALL_TABLE = "select * from hero_table";
+    MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = openOrCreateDatabase("hero_db.db", Context.MODE_PRIVATE, null);
         init();
+//        Intent intent = new Intent(this, MusicService.class);
+//        startService(intent);
+//        bindService(intent, sc, Context.BIND_AUTO_CREATE);
+
+        mp.start();
         EventBus.getDefault().register(this);
+
     }
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         db.close();
+        mp.release();
         super.onDestroy();
     }
     public void init() {
+        mp = MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
         db.execSQL(SQL_CREATE_TABLE);
         Cursor cursor = db.rawQuery(SQL_SELECT_ALL_TABLE, null);
         while ( cursor.moveToNext()){
@@ -59,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
             );
             main_list_data.add(heroInfomation);
         }
+//        sc = new ServiceConnection() {
+//            @Override
+//            public void onServiceConnected(ComponentName name, IBinder service) {
+//                myBinder = (MusicService.MyBinder) service;
+//            }
+//            @Override
+//            public void onServiceDisconnected(ComponentName name) {
+//                sc = null;
+//            }
+//        };
          //初始化十个英雄
 //        main_list_data.add(new HeroInfomation(R.drawable.liubei,   "刘备", "玄德", "男", "161-223", "蜀", "幽州涿郡", "刘备，蜀汉的开国皇帝，汉景帝之子中山靖王刘胜的后代。"));
 //        main_list_data.add(new HeroInfomation(R.drawable.zhangfei, "张飞", "益德", "男", "？-221", "蜀", "幽州涿郡", "张飞穿针大眼瞪小眼"));
@@ -73,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         //main_list_data表示在首页显示的英雄数据
 
         // 给首页的RecycleView赋值
-        R.id
         RecyclerView main_list = (RecyclerView) findViewById(R.id.list);
         RecyclerView search_list = (RecyclerView) findViewById(R.id.search_list);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -172,6 +195,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton musicButton = (FloatingActionButton)findViewById(R.id.music);
+        musicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mp.isPlaying()){
+                    mp.stop();
+                }else{
+                    mp=MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
+                    mp.start();
+                }
+            }
+        });
+
         final ImageView back = (ImageView)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,4 +302,10 @@ public class MainActivity extends AppCompatActivity {
                 || heroitem.homeTown.contains(query) || heroitem.loyalTo.contains(query)
                 || heroitem.detailInfo.contains(query);
     }
+
+    protected void onStop(){
+        super.onStop();
+        mp.stop();
+    }
+
 }
