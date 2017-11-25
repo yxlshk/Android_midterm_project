@@ -1,13 +1,19 @@
 package com.example.a77354.android_midterm_project;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,15 +36,14 @@ public class MainActivity extends AppCompatActivity {
     CommonAdapter<HeroInfomation> search;
     private List<HeroInfomation> main_list_data = new ArrayList<HeroInfomation>();
     private ServiceConnection sc;
-    private MusicService.MyBinder myBinder;
-
+    private IBinder mBinder;
     private List<HeroInfomation> query_list = new ArrayList<HeroInfomation>();
     SQLiteDatabase db;
     String SQL_CREATE_TABLE = "create table if not exists hero_table(name text, nick_name text, sex text, born_die_date text, home_town text, loyal_to text, detail_info text, image_id int)" ;
     String SQL_INSERT_TABLE = "insert into hero_table values(?,?,?,?,?,?,?,?)";
     String SQL_SELECT_ALL_TABLE = "select * from hero_table";
     String SQL_SELECT_CHECK_TABLE = "select count(*) as c from Sqlite_master  where type ='table' and name ='hero_table'";
-    MediaPlayer mp;
+    MusicService musicService = new MusicService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +51,23 @@ public class MainActivity extends AppCompatActivity {
         db = openOrCreateDatabase("hero_db.db", Context.MODE_PRIVATE, null);
         initDB();
         init();
-//        Intent intent = new Intent(this, MusicService.class);
-//        startService(intent);
-//        bindService(intent, sc, Context.BIND_AUTO_CREATE);
+       Intent intent = new Intent(this, MusicService.class);
+       startService(intent);
+        //初始化sc
+        sc = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                mBinder = service;
+            }
 
-        mp.start();
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                sc = null;
+            }
+        };
+        bindService(intent, sc, Context.BIND_AUTO_CREATE);
+
+ //       mp.start();
         EventBus.getDefault().register(this);
 
     }
@@ -58,12 +75,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         db.close();
-        mp.release();
+    //    mp.release();
+        unbindService(sc);
+        Intent intent = new Intent(this, MusicService.class);
+        stopService(intent);
         super.onDestroy();
     }
     public void init() {
 
-        mp = MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
+    //    mp = MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
 
         Cursor cursor = db.rawQuery(SQL_SELECT_ALL_TABLE, null);
         while ( cursor.moveToNext()){
@@ -71,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     cursor.getInt(cursor.getColumnIndex("image_id")),
                    cursor.getString(cursor.getColumnIndex("name")),cursor.getString(cursor.getColumnIndex("nick_name")),
                    cursor.getString(cursor.getColumnIndex("sex")),cursor.getString(cursor.getColumnIndex("born_die_date")),
-                   cursor.getString(cursor.getColumnIndex("home_town")),cursor.getString(cursor.getColumnIndex("loyal_to")),
+                    cursor.getString(cursor.getColumnIndex("loyal_to")), cursor.getString(cursor.getColumnIndex("home_town")),
                    cursor.getString(cursor.getColumnIndex("detail_info"))
             );
             main_list_data.add(heroInfomation);
@@ -146,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(MainActivity.this, detailActivity.class);
-                HeroInfomation heroInfo = main_list_data.get(position);
+                HeroInfomation heroInfo = query_list.get(position);
                 intent.putExtra("heroInfo", heroInfo);
                 startActivity(intent);
                 // 点击跳转代码在这里写
@@ -157,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
         search.setOnItemLongClickListener(new CommonAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View view, int position) {
-                String name = main_list_data.get(position).name;
-                main_list_data.remove(position);
-                hero.notifyDataSetChanged();
+                String name = query_list.get(position).name;
+                query_list.remove(position);
+                search.notifyDataSetChanged();
                 int num = position + 1;
                 Toast.makeText(getApplicationContext(), "删除第"+num+"个英雄", Toast.LENGTH_SHORT).show();
                 db.delete("hero_table", "name = ?", new String[]{name});
@@ -180,12 +200,12 @@ public class MainActivity extends AppCompatActivity {
         musicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mp.isPlaying()){
-                    mp.stop();
+                if (musicService.mp.isPlaying()){
+                    musicService.mp.pause();
                 }else{
-                    mp=MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
-                    mp.start();
+                    musicService.mp.start();
                 }
+
             }
         });
 
@@ -286,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStop(){
         super.onStop();
-        mp.stop();
+
     }
 
     public void initDB(){

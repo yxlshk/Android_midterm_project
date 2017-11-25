@@ -10,16 +10,20 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 
 public class MusicService extends Service {
-    public  MediaPlayer mp = new MediaPlayer();
+    public  static MediaPlayer mp;
     private IBinder iBinder = new MyBinder();
 
-
-    public MusicService(){
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if(mp != null)
+            return;
         try {
             mp=MediaPlayer.create(this, R.raw.sanguo_01);
             mp.setLooping(true);
@@ -44,7 +48,7 @@ public class MusicService extends Service {
             switch (code) {
                 case R.id.music:
                     //播放
-                    play();
+                    ;
                     break;
             }
             return super.onTransact(code, data, reply, flag);
@@ -61,8 +65,8 @@ public class MusicService extends Service {
     }
 
     public void onDestroy() {
-        super.onDestroy();
         mp.stop();
+        super.onDestroy();
     }
 
 }
