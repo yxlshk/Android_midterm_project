@@ -27,7 +27,7 @@ import java.util.List;
 public class editActivity extends AppCompatActivity {
     private boolean isChangingHeroInfo = false; //true表示是修改模式，false表示是新增英雄信息模式。
     private int imageIdOfHero = R.drawable.unknown;               //记录传来的英雄头像id。如果是新增英雄信息模式，则为unknown
-
+    private String nickName = "", detailInfo="";           //记录传来英雄的字和详细信息。
     private CommonAdapter<ImageInfomation> imageAdapter;
     private List<ImageInfomation> imageInfomationList = new ArrayList<ImageInfomation>();
     @Override
@@ -44,6 +44,8 @@ public class editActivity extends AppCompatActivity {
         isChangingHeroInfo = true;  //设置为修改模式
         HeroInfomation heroInfo = (HeroInfomation) bundle.getSerializable("heroInfo");
         imageIdOfHero = heroInfo.imageId;   //保存英雄头像id
+        nickName = heroInfo.nickName;        //保存英雄的字
+        detailInfo = heroInfo.detailInfo;   //保存英雄详细介绍
         ImageView imageView = (ImageView)findViewById(R.id.avatar);
         EditText nameView = (EditText)findViewById(R.id.realName);
         EditText bornDiedDateView = (EditText)findViewById(R.id.realLife);
@@ -88,7 +90,7 @@ public class editActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancelBtn);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         Button okButton = (Button) findViewById(R.id.okBtn);
-        Button changeAvatarButton = (Button) findViewById(R.id.changeAvatar);
+        TextView changeAvatarButton = (TextView) findViewById(R.id.changeAvatar);
         final ImageView avatar = (ImageView) findViewById(R.id.avatar);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +116,7 @@ public class editActivity extends AppCompatActivity {
                 String sex = checkedSexButton.getText().toString();
                 String loyalTo = checkedLoyalToButton.getText().toString();
 
-                HeroInfomation heroInfo = new HeroInfomation(imageId, name, "", sex, bornDiedDate, loyalTo, hometown, "");
+                HeroInfomation heroInfo = new HeroInfomation(imageId, name, nickName, sex, bornDiedDate, loyalTo, hometown, detailInfo);
                 MessageEvent messageEvent = new MessageEvent(heroInfo, isChangingHeroInfo);
                 EventBus.getDefault().post(messageEvent);
                 finish();

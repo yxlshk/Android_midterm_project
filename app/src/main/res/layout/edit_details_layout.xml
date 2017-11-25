@@ -62,13 +62,13 @@
         android:background="@color/transparent"
         android:src="@drawable/unknown"/>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/changeAvatar"
         android:minWidth="0dp"
         android:minHeight="25dp"
-        android:text="更换头像"
+        android:text="@string/changeAvatar"
         app:layout_constraintLeft_toLeftOf="@id/avatar"
         app:layout_constraintRight_toRightOf="@id/avatar"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
@@ -86,11 +86,11 @@
         app:layout_constraintTop_toTopOf="@id/realName"
         android:textSize="20sp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="85dp"
+        android:layout_marginLeft="65dp"
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realName"
         android:textSize="20sp"
@@ -157,7 +157,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realLife"
         android:textSize="20sp"
@@ -177,7 +177,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realPlace"
         android:textSize="20sp"
