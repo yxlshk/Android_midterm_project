@@ -37,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
     String SQL_CREATE_TABLE = "create table if not exists hero_table(name text, nick_name text, sex text, born_die_date text, home_town text, loyal_to text, detail_info text, image_id int)" ;
     String SQL_INSERT_TABLE = "insert into hero_table values(?,?,?,?,?,?,?,?)";
     String SQL_SELECT_ALL_TABLE = "select * from hero_table";
+    String SQL_SELECT_CHECK_TABLE = "select count(*) as c from Sqlite_master  where type ='table' and name ='hero_table'";
     MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = openOrCreateDatabase("hero_db.db", Context.MODE_PRIVATE, null);
+        initDB();
         init();
 //        Intent intent = new Intent(this, MusicService.class);
 //        startService(intent);
@@ -60,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
     public void init() {
+
         mp = MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
-        db.execSQL(SQL_CREATE_TABLE);
+
         Cursor cursor = db.rawQuery(SQL_SELECT_ALL_TABLE, null);
         while ( cursor.moveToNext()){
             HeroInfomation heroInfomation = new HeroInfomation(
@@ -73,28 +76,6 @@ public class MainActivity extends AppCompatActivity {
             );
             main_list_data.add(heroInfomation);
         }
-//        sc = new ServiceConnection() {
-//            @Override
-//            public void onServiceConnected(ComponentName name, IBinder service) {
-//                myBinder = (MusicService.MyBinder) service;
-//            }
-//            @Override
-//            public void onServiceDisconnected(ComponentName name) {
-//                sc = null;
-//            }
-//        };
-         //初始化十个英雄
-//        main_list_data.add(new HeroInfomation(R.drawable.liubei,   "刘备", "玄德", "男", "161-223", "蜀", "幽州涿郡", "刘备，蜀汉的开国皇帝，汉景帝之子中山靖王刘胜的后代。"));
-//        main_list_data.add(new HeroInfomation(R.drawable.zhangfei, "张飞", "益德", "男", "？-221", "蜀", "幽州涿郡", "张飞穿针大眼瞪小眼"));
-//        main_list_data.add(new HeroInfomation(R.drawable.guanyu,   "关羽", "云长", "男", "？-219", "蜀", "司隶河东郡解", "尔等敢应战否"));
-//        main_list_data.add(new HeroInfomation(R.drawable.caocao,   "曹操", "孟德", "男", "155-220", "魏", "豫州沛国谯", "宁教我负天下人休教天下人负我"));
-//        main_list_data.add(new HeroInfomation(R.drawable.sunquan,  "孙权", "仲谋", "男", "182-252", "吴", "扬州吴郡富春", "孙坚之子，孙策之弟。东汉建安五年，兄孙策病死，孙权继位吴侯、讨逆将军，领会稽太守，开始统领江东。"));
-//        main_list_data.add(new HeroInfomation(R.drawable.sunce,    "孙策", "伯符", "男", "175-200", "吴", "扬州吴郡富春", "江东小霸王"));
-//        main_list_data.add(new HeroInfomation(R.drawable.sunshangxiang, "孙尚香", "", "女", "？-？", "蜀", "扬州吴郡富春", "刘备的老婆"));
-//        main_list_data.add(new HeroInfomation(R.drawable.caozhi,   "曹植", "子建", "男", "192-232", "魏", "豫州沛国谯", "七步诗"));
-//        main_list_data.add(new HeroInfomation(R.drawable.caopi,    "曹丕", "子桓", "男", "187-226", "魏", "豫州沛国谯", "短命"));
-//        main_list_data.add(new HeroInfomation(R.drawable.zhaoyun,  "赵云", "子龙", "男", "？-229", "蜀", "冀州常山国真定", "常山赵子龙"));
-        //main_list_data表示在首页显示的英雄数据
 
         // 给首页的RecycleView赋值
         RecyclerView main_list = (RecyclerView) findViewById(R.id.list);
@@ -308,4 +289,33 @@ public class MainActivity extends AppCompatActivity {
         mp.stop();
     }
 
+    public void initDB(){
+        Cursor cursor = db.rawQuery(SQL_SELECT_CHECK_TABLE, null);
+        if (cursor.moveToNext()) {
+            int count = cursor.getInt(0);
+            if (count <= 0) {
+                db.execSQL(SQL_CREATE_TABLE);
+                List<HeroInfomation> list_data = new ArrayList<HeroInfomation>();
+                list_data.add(new HeroInfomation(R.drawable.liubei,   "刘备", "玄德", "男", "161-223", "蜀", "幽州涿郡", "刘备，蜀汉的开国皇帝，汉景帝之子中山靖王刘胜的后代。"));
+                list_data.add(new HeroInfomation(R.drawable.zhangfei, "张飞", "益德", "男", "？-221", "蜀", "幽州涿郡", "张飞穿针大眼瞪小眼"));
+                list_data.add(new HeroInfomation(R.drawable.guanyu,   "关羽", "云长", "男", "？-219", "蜀", "司隶河东郡解", "尔等敢应战否"));
+                list_data.add(new HeroInfomation(R.drawable.caocao,   "曹操", "孟德", "男", "155-220", "魏", "豫州沛国谯", "宁教我负天下人休教天下人负我"));
+                list_data.add(new HeroInfomation(R.drawable.sunquan,  "孙权", "仲谋", "男", "182-252", "吴", "扬州吴郡富春", "孙坚之子，孙策之弟。东汉建安五年，兄孙策病死，孙权继位吴侯、讨逆将军，领会稽太守，开始统领江东。"));
+                list_data.add(new HeroInfomation(R.drawable.sunce,    "孙策", "伯符", "男", "175-200", "吴", "扬州吴郡富春", "江东小霸王"));
+                list_data.add(new HeroInfomation(R.drawable.sunshangxiang, "孙尚香", "", "女", "？-？", "蜀", "扬州吴郡富春", "刘备的老婆"));
+                list_data.add(new HeroInfomation(R.drawable.caozhi,   "曹植", "子建", "男", "192-232", "魏", "豫州沛国谯", "七步诗"));
+                list_data.add(new HeroInfomation(R.drawable.caopi,    "曹丕", "子桓", "男", "187-226", "魏", "豫州沛国谯", "短命"));
+                list_data.add(new HeroInfomation(R.drawable.zhaoyun,  "赵云", "子龙", "男", "？-229", "蜀", "冀州常山国真定", "常山赵子龙"));
+                for (int i = 0; i < list_data.size(); i++){
+                    HeroInfomation heroInfo = list_data.get(i);
+                    db.execSQL(SQL_INSERT_TABLE, new Object[]{
+                            heroInfo.name, heroInfo.nickName,
+                            heroInfo.sex, heroInfo.bornDiedDate,
+                            heroInfo.homeTown, heroInfo.loyalTo,
+                            heroInfo.detailInfo, heroInfo.imageId
+                    });
+                }
+            }
+        }
+    }
 }
