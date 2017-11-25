@@ -10,14 +10,19 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/back"
-        android:layout_margin="10dp"/>
+        android:src="@drawable/back2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"/>
     <SearchView
         android:id="@+id/search_view"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="50dp"
         android:iconifiedByDefault="false"
         android:inputType="textFilter"
+        android:focusable="false"
         android:queryHint="请输入您要搜索的人物的姓名">
     </SearchView>
 
@@ -51,8 +56,8 @@
     app:backgroundTint="@color/white"
     app:backgroundTintMode="src_atop"
     app:rippleColor="@color/white"
-    android:layout_marginRight="50dp"
-    android:layout_marginBottom="50dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginBottom="40dp"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintBottom_toBottomOf="parent" />
 
