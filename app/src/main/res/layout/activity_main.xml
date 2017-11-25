@@ -23,7 +23,7 @@
         android:iconifiedByDefault="false"
         android:inputType="textFilter"
         android:focusable="false"
-        android:queryHint="请输入您要搜索的人物的姓名">
+        android:queryHint="请输入您要搜索的信息">
     </SearchView>
 
     <android.support.v7.widget.RecyclerView
