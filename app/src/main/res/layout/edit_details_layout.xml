@@ -62,11 +62,12 @@
         android:background="@color/transparent"
         android:src="@drawable/unknown"/>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="0dp"
         android:minHeight="25dp"
+        android:text="@string/changeAvatar"
         app:layout_constraintLeft_toLeftOf="@id/avatar"
         app:layout_constraintRight_toRightOf="@id/avatar"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
@@ -88,7 +89,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realName"
         android:textSize="20sp"
@@ -155,7 +156,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realLife"
         android:textSize="20sp"
@@ -175,7 +176,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/realPlace"
         android:textSize="20sp"

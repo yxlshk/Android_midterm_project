@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -176,15 +177,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton musicButton = (FloatingActionButton)findViewById(R.id.music);
+        final FloatingActionButton musicButton = (FloatingActionButton)findViewById(R.id.music);
         musicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mp.isPlaying()){
                     mp.stop();
+                    musicButton.setImageResource(R.drawable.no_music);
                 }else{
                     mp=MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
                     mp.start();
+                    musicButton.setImageResource(R.drawable.music);
                 }
             }
         });
