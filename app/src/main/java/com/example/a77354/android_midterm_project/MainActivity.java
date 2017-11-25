@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         mp.start();
         EventBus.getDefault().register(this);
+//        SearchView search = (SearchView) findViewById(R.id.search_view);
+//        search.clearFocus();
 
     }
     @Override
