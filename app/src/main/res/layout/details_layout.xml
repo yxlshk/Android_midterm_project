@@ -171,4 +171,38 @@
         app:layout_constraintLeft_toLeftOf="@id/realPlace"
         android:textColor="@color/black"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        app:layout_constraintTop_toBottomOf="@id/infoLeague"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#696969"
+        android:layout_margin="15dp"
+        android:id="@+id/hrline"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/introduction"
+        android:text="人物简介"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hrline"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/introd_detail"
+        android:text="曹操是西园八校尉之一，曾只身行刺董卓，失败后和袁绍共同联合天下诸侯讨伐董卓，后独自发展自身势力，一生中先后战胜了袁术、吕布、张绣、袁绍、刘表、张鲁、马超等割据势力，统一了北方。"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/introduction"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/black"
+        android:layout_margin="15dp" />
+
 </android.support.constraint.ConstraintLayout>
