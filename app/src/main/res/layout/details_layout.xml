@@ -90,10 +90,31 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/nickname"
+        android:text="字:"
+        app:layout_constraintRight_toRightOf="@id/infoName"
+        app:layout_constraintTop_toBottomOf="@id/infoName"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/realNickname"
+        android:text="云长"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@id/nickname"
+        app:layout_constraintLeft_toLeftOf="@id/realName"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/infoGender"
         android:text="@string/gender"
         app:layout_constraintRight_toRightOf="@id/infoName"
-        app:layout_constraintTop_toBottomOf="@id/infoName"
+        app:layout_constraintTop_toBottomOf="@id/nickname"
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"/>

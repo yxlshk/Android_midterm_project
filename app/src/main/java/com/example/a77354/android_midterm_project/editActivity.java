@@ -27,7 +27,6 @@ import java.util.List;
 public class editActivity extends AppCompatActivity {
     private boolean isChangingHeroInfo = false; //true表示是修改模式，false表示是新增英雄信息模式。
     private int imageIdOfHero = R.drawable.unknown;               //记录传来的英雄头像id。如果是新增英雄信息模式，则为unknown
-    private String nickName = "";                                   //记录英雄的字。
     private CommonAdapter<ImageInfomation> imageAdapter;
     private List<ImageInfomation> imageInfomationList = new ArrayList<ImageInfomation>();
     @Override
@@ -44,10 +43,10 @@ public class editActivity extends AppCompatActivity {
         isChangingHeroInfo = true;  //设置为修改模式
         HeroInfomation heroInfo = (HeroInfomation) bundle.getSerializable("heroInfo");
         imageIdOfHero = heroInfo.imageId;   //保存英雄头像id
-        nickName = heroInfo.nickName;        //保存英雄的字
         TextView titleView = (TextView)findViewById(R.id.editTitle);
         ImageView imageView = (ImageView)findViewById(R.id.avatar);
         EditText nameView = (EditText)findViewById(R.id.realName);
+        EditText nicknameView = (EditText)findViewById(R.id.realNickname);
         EditText bornDiedDateView = (EditText)findViewById(R.id.realLife);
         EditText homwTownView = (EditText)findViewById(R.id.realPlace);
         EditText heroIntroduction = (EditText)findViewById(R.id.introductionMsg);
@@ -57,6 +56,7 @@ public class editActivity extends AppCompatActivity {
         titleView.setText("修改信息");
         imageView.setImageResource(heroInfo.imageId);
         nameView.setText(heroInfo.name);
+        nicknameView.setText(heroInfo.nickName);
         bornDiedDateView.setText(heroInfo.bornDiedDate);
         homwTownView.setText(heroInfo.homeTown);
         heroIntroduction.setText(heroInfo.detailInfo);
@@ -112,6 +112,7 @@ public class editActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int imageId = imageIdOfHero;
                 String name = ((EditText)findViewById(R.id.realName)).getText().toString();
+                String nickName = ((EditText)findViewById(R.id.realNickname)).getText().toString();
                 String bornDiedDate = ((EditText)findViewById(R.id.realLife)).getText().toString();
                 String hometown = ((EditText)findViewById(R.id.realPlace)).getText().toString();
                 RadioButton checkedSexButton = (RadioButton) findViewById( ((RadioGroup)findViewById(R.id.realGender)).getCheckedRadioButtonId() );

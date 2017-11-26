@@ -27,6 +27,7 @@ public class detailActivity extends AppCompatActivity {
         HeroInfomation heroInfo = (HeroInfomation) bundle.getSerializable("heroInfo");
         TextView heroIntroduction = (TextView)findViewById(R.id.introd_detail);
         ImageView imageView = (ImageView)findViewById(R.id.avatar);
+        TextView nicknameView = (TextView)findViewById(R.id.realNickname);
         TextView nameView = (TextView)findViewById(R.id.realName);
         TextView sexView = (TextView)findViewById(R.id.realGender);
         TextView bornDiedDateView = (TextView)findViewById(R.id.realLife);
@@ -36,6 +37,7 @@ public class detailActivity extends AppCompatActivity {
         heroIntroduction.setText(heroInfo.detailInfo);
         imageView.setImageResource(heroInfo.imageId);
         nameView.setText(heroInfo.name);
+        nicknameView.setText(heroInfo.nickName);
         sexView.setText(heroInfo.sex);
         bornDiedDateView.setText(heroInfo.bornDiedDate);
         homwTownView.setText(heroInfo.homeTown);
