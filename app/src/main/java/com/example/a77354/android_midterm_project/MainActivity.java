@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(getApplicationContext(), "create", Toast.LENGTH_LONG).show();
         db = openOrCreateDatabase("hero_db.db", Context.MODE_PRIVATE, null);
         initDB();
         init();

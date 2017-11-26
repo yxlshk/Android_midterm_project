@@ -18,21 +18,21 @@ public class MyApplication extends Application {
         super.onCreate();
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
-            @Override
-            public void onActivityStopped(Activity activity) {
-                count--;
-                if (count == 0) {
-                    Log.v("vergo", "**********切到后台**********");
-                    if (musicService.mp != null){
-                        if(musicService.mp.isPlaying()) {
-                            musicIsOn = true;
-                            musicService.mp.pause();
-                        }
-                        else
-                            musicIsOn = false;
+        @Override
+        public void onActivityStopped(Activity activity) {
+            count--;
+            if (count == 0) {
+                Log.v("vergo", "**********切到后台**********");
+                if (musicService.mp != null){
+                    if(musicService.mp.isPlaying()) {
+                        musicIsOn = true;
+                        musicService.mp.pause();
                     }
+                    else
+                        musicIsOn = false;
                 }
             }
+        }
 
             @Override
             public void onActivityStarted(Activity activity) {
