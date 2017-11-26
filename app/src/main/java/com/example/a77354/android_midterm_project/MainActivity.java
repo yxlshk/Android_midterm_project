@@ -75,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     @Override
+    protected void onResume() {
+        super.onResume();
+        FloatingActionButton musicButton = (FloatingActionButton)findViewById(R.id.music);
+        if(musicService.mp != null) {
+            if(musicService.mp.isPlaying())
+                musicButton.setImageResource(R.drawable.music);
+            else
+                musicButton.setImageResource(R.drawable.no_music);
+        }
+    }
+    @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         db.close();
@@ -85,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         System.exit(0);
     }
+
+
     public void init() {
 
     //    mp = MediaPlayer.create(MainActivity.this, R.raw.sanguo_01);
@@ -307,11 +320,6 @@ public class MainActivity extends AppCompatActivity {
                 || heroitem.sex.contains(query) || heroitem.bornDiedDate.contains(query)
                 || heroitem.homeTown.contains(query) || heroitem.loyalTo.contains(query)
                 || heroitem.detailInfo.contains(query);
-    }
-
-    protected void onStop(){
-        super.onStop();
-
     }
 
     public void initDB(){

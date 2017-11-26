@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class detailActivity extends AppCompatActivity {
     }
     private void initLayout(Bundle bundle) {
         HeroInfomation heroInfo = (HeroInfomation) bundle.getSerializable("heroInfo");
+        TextView heroIntroduction = (TextView)findViewById(R.id.introd_detail);
         ImageView imageView = (ImageView)findViewById(R.id.avatar);
         TextView nameView = (TextView)findViewById(R.id.realName);
         TextView sexView = (TextView)findViewById(R.id.realGender);
@@ -31,6 +33,7 @@ public class detailActivity extends AppCompatActivity {
         TextView homwTownView = (TextView)findViewById(R.id.realPlace);
         TextView loyalToView = (TextView)findViewById(R.id.realLeague);
 
+        heroIntroduction.setText(heroInfo.detailInfo);
         imageView.setImageResource(heroInfo.imageId);
         nameView.setText(heroInfo.name);
         sexView.setText(heroInfo.sex);
