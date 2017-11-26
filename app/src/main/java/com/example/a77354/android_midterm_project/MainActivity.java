@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toast.makeText(getApplicationContext(), "create", Toast.LENGTH_LONG).show();
         db = openOrCreateDatabase("hero_db.db", Context.MODE_PRIVATE, null);
         initDB();
         init();
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MusicService.class);
         stopService(intent);
         super.onDestroy();
+        System.exit(0);
     }
     public void init() {
 
@@ -339,5 +342,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    //按返回键直接finish当前页。
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

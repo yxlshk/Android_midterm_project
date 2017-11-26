@@ -22,6 +22,4 @@
         <activity android:name=".editActivity"></activity>
         <service android:name=".MusicService" android:exported="true"></service>
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>
