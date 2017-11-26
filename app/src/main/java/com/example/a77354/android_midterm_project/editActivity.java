@@ -162,13 +162,13 @@ public class editActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 imageIdOfHero = tempImageId;
-                                Toast.makeText(getApplicationContext(), "您选择了[取消]", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "您选择了[取消]", Toast.LENGTH_SHORT).show();
                             }
                         }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 avatar.setImageResource(imageIdOfHero);
-                                Toast.makeText(getApplicationContext(), "您选择了[确定]", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "您选择了[确定]", Toast.LENGTH_SHORT).show();
                             }
                         }).create();
                 alerDialog.show();
