@@ -16,6 +16,6 @@
     <string name="league2">蜀</string>
     <string name="league3">吴</string>
     <string name="league4">群雄</string>
-    <string name="editDetails">修改信息</string>
+    <string name="editDetails">新增人物</string>
 
 </resources>
