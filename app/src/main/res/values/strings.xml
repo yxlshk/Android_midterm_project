@@ -10,4 +10,12 @@
     <string name="cancel">取消</string>
     <string name="ok">确定</string>
     <string name="changeAvatar">修改头像</string>
+    <string name="gender1">男</string>
+    <string name="gender2">女</string>
+    <string name="league1">魏</string>
+    <string name="league2">蜀</string>
+    <string name="league3">吴</string>
+    <string name="league4">群雄</string>
+    <string name="editDetails">新增人物</string>
+
 </resources>
